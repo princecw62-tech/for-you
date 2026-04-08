@@ -68,17 +68,27 @@
             box-sizing: border-box;
         }
 
-        /* Makes the 5th card span across both columns if it's the last one */
+        /* Makes the 5th card span across both columns and makes it BIGGER */
         .memory-card:last-child:nth-child(odd) {
             grid-column: 1 / span 2;
-            width: 80%;
+            width: 100%; /* Spans full container width */
+            transform: rotate(0deg); /* Keeping video straight for better viewing */
         }
 
         .memory-card:hover { transform: rotate(0deg) scale(1.05); z-index: 20; }
         
-        .memory-card img, .memory-card video { 
+        .memory-card img { 
             width: 100%; 
             height: 140px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            display: block;
+        }
+
+        /* Larger height specifically for the video card */
+        .memory-card video { 
+            width: 100%; 
+            height: 300px; /* Increased height for the video */
             object-fit: cover; 
             border-radius: 8px; 
             display: block;
@@ -145,7 +155,7 @@
                 <video autoplay loop muted playsinline>
                     <source src="Snapchat-990637410.mp4" type="video/mp4">
                 </video>
-                <p>Don't have more pics, but have a lifetime of memories 💖</p>
+                <p style="font-size: 0.85rem; font-weight: 600;">Don't have more pics, but have a lifetime of memories 💖</p>
             </div>
         </div>
 
