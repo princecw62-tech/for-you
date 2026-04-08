@@ -6,6 +6,7 @@
 
 <title>For Neha ❤️</title>
 
+<!-- Premium Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -19,6 +20,7 @@ body {
     overflow-x: hidden;
 }
 
+/* Container */
 .container {
     margin: 60px 15px;
     padding: 25px;
@@ -28,21 +30,28 @@ body {
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
+/* Title */
 #typing {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
 }
 
-p {
+/* Hidden Message */
+#loveMessage {
+    display: none;
     font-size: 16px;
     line-height: 1.7;
-    font-weight: 300;
+    margin-top: 15px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
+/* Subtitle */
 h2 {
     font-family: 'Playfair Display', serif;
 }
 
+/* Buttons */
 button {
     padding: 10px 22px;
     font-size: 15px;
@@ -53,21 +62,33 @@ button {
     transition: 0.3s;
 }
 
+/* Yes Button */
 #yesBtn {
     background: #ff4d6d;
     color: white;
+    box-shadow: 0 4px 15px rgba(255,77,109,0.4);
 }
 
+/* No Button */
 #noBtn {
     background: white;
     color: #ff4d6d;
     position: fixed;
 }
 
+/* Click Button */
+#openBtn {
+    background: white;
+    color: #ff4d6d;
+    font-weight: 500;
+}
+
+/* Hover */
 button:hover {
     transform: scale(1.08);
 }
 
+/* Celebration */
 #celebration {
     display: none;
     margin-top: 120px;
@@ -75,6 +96,7 @@ button:hover {
     font-family: 'Playfair Display', serif;
 }
 
+/* Hearts */
 .heart {
     position: fixed;
     animation: float 6s linear infinite;
@@ -84,6 +106,12 @@ button:hover {
     0% { transform: translateY(100vh); opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
 }
+
+/* Mobile */
+@media (max-width: 480px) {
+    #typing { font-size: 26px; }
+    #loveMessage { font-size: 14px; }
+}
 </style>
 </head>
 
@@ -92,10 +120,14 @@ button:hover {
 <div class="container">
     <h1 id="typing"></h1>
 
-    <p>
+    <!-- Click Button -->
+    <button id="openBtn" onclick="showMessage()">💌 Click Here</button>
+
+    <!-- Hidden Message -->
+    <p id="loveMessage">
         Our friendship is endless ❤️  
         Every moment with you feels magical ✨  
-        You changed my world completely 💖  
+        You came into my life quietly, but changed everything 💖  
     </p>
 
     <h2>Will You Be My Friend Forever? 💖</h2>
@@ -110,7 +142,7 @@ button:hover {
 </div>
 
 <script>
-// Typing effect FIX
+// Typing Effect
 let text = "For Neha ❤️";
 let i = 0;
 document.getElementById("typing").innerHTML = "";
@@ -124,13 +156,23 @@ function typingEffect() {
 }
 typingEffect();
 
-// YES click
+// Show Message
+function showMessage() {
+    let msg = document.getElementById("loveMessage");
+    msg.style.display = "block";
+
+    setTimeout(() => {
+        msg.style.opacity = "1";
+    }, 100);
+}
+
+// YES Click
 function yesClicked() {
     document.querySelector(".container").style.display = "none";
     document.getElementById("celebration").style.display = "block";
 }
 
-// Move button FIX (stay inside screen)
+// Move NO Button
 function moveButton() {
     let btn = document.getElementById("noBtn");
     let x = Math.random() * (window.innerWidth - 120);
@@ -139,7 +181,7 @@ function moveButton() {
     btn.style.top = y + "px";
 }
 
-// Hearts
+// Floating Hearts
 setInterval(() => {
     let heart = document.createElement("div");
     heart.innerHTML = "❤️";
