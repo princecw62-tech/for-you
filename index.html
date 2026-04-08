@@ -6,45 +6,51 @@
 
 <title>For Neha ❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     text-align: center;
     color: white;
     overflow-x: hidden;
 }
 
-/* Container */
 .container {
     margin: 60px 15px;
-    padding: 20px;
-    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    background: rgba(255,255,255,0.12);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
-/* Title */
 #typing {
-    font-size: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
 }
 
-/* Text */
 p {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.7;
+    font-weight: 300;
 }
 
-/* Buttons */
+h2 {
+    font-family: 'Playfair Display', serif;
+}
+
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px 22px;
+    font-size: 15px;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     margin: 8px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 #yesBtn {
@@ -58,14 +64,17 @@ button {
     position: fixed;
 }
 
-/* Celebration */
+button:hover {
+    transform: scale(1.08);
+}
+
 #celebration {
     display: none;
     margin-top: 120px;
-    font-size: 24px;
+    font-size: 26px;
+    font-family: 'Playfair Display', serif;
 }
 
-/* Hearts */
 .heart {
     position: fixed;
     animation: float 6s linear infinite;
@@ -74,12 +83,6 @@ button {
 @keyframes float {
     0% { transform: translateY(100vh); opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* Mobile tweak */
-@media (max-width: 480px) {
-    #typing { font-size: 24px; }
-    p { font-size: 14px; }
 }
 </style>
 </head>
@@ -90,15 +93,15 @@ button {
     <h1 id="typing"></h1>
 
     <p>
-        Our Friendship is Endless ❤️  
+        Our friendship is endless ❤️  
         Every moment with you feels magical ✨  
-        You came into my life quietly, but changed everything ✨  
+        You changed my world completely 💖  
     </p>
 
-    <h2>Will You Be My Friend Forever ? 💖</h2>
+    <h2>Will You Be My Friend Forever? 💖</h2>
 
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
-    <button id="noBtn" ontouchstart="moveButton()">No 😢</button>
+    <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No 😢</button>
 </div>
 
 <div id="celebration">
@@ -107,9 +110,11 @@ button {
 </div>
 
 <script>
-// Typing effect
-let text = "Neha ❤️";
+// Typing effect FIX
+let text = "For Neha ❤️";
 let i = 0;
+document.getElementById("typing").innerHTML = "";
+
 function typingEffect() {
     if (i < text.length) {
         document.getElementById("typing").innerHTML += text.charAt(i);
@@ -119,17 +124,19 @@ function typingEffect() {
 }
 typingEffect();
 
-// YES
+// YES click
 function yesClicked() {
     document.querySelector(".container").style.display = "none";
     document.getElementById("celebration").style.display = "block";
 }
 
-// Move NO button
+// Move button FIX (stay inside screen)
 function moveButton() {
     let btn = document.getElementById("noBtn");
-    btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-    btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    let x = Math.random() * (window.innerWidth - 120);
+    let y = Math.random() * (window.innerHeight - 60);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
 }
 
 // Hearts
