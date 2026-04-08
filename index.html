@@ -31,7 +31,7 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             text-align: center;
-            transition: max-width 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         .profile-img { width: 110px; height: 110px; border-radius: 50%; border: 4px solid white; margin-bottom: 15px; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -46,12 +46,45 @@
         #noBtn { background: white; color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); z-index: 10; white-space: nowrap; }
         #openBtn { background: white; color: var(--primary); width: 80%; margin: 0 auto; }
 
+        /* CELEBRATION & MEMORIES */
         #celebration { display: none; animation: popIn 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.27); }
-        .memory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-        .memory-card { background: white; padding: 8px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transform: rotate(var(--r)); transition: transform 0.3s ease; }
-        .memory-card:hover { transform: rotate(0deg) scale(1.1); z-index: 20; }
-        .memory-card img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
-        .memory-card p { font-size: 0.75rem; margin: 8px 0 0 0; color: #666; font-weight: 500; }
+        
+        .memory-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            margin-top: 25px; 
+            justify-items: center;
+        }
+
+        .memory-card { 
+            background: white; 
+            padding: 8px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+            transform: rotate(var(--r)); 
+            transition: transform 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Makes the 5th card span across both columns if it's the last one */
+        .memory-card:last-child:nth-child(odd) {
+            grid-column: 1 / span 2;
+            width: 80%;
+        }
+
+        .memory-card:hover { transform: rotate(0deg) scale(1.05); z-index: 20; }
+        
+        .memory-card img, .memory-card video { 
+            width: 100%; 
+            height: 140px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            display: block;
+        }
+
+        .memory-card p { font-size: 0.75rem; margin: 8px 0 0 0; color: #666; font-weight: 500; line-height: 1.2; }
 
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         .floating-heart { position: fixed; pointer-events: none; z-index: 1; animation: floatUp 4s linear forwards; }
@@ -80,9 +113,7 @@
             <p class="line">You make every moment special ✨</p>
             <p class="line">A friend like you is a blessing... 💖</p>
         </div>
-
         <h3 style="margin-bottom: 20px;">Will you be my friend forever?</h3>
-
         <div class="btn-wrapper">
             <button id="yesBtn" onclick="celebrate()">Yes! 💕</button>
             <button id="noBtn" onmouseenter="dodge()" ontouchstart="dodge()">No 🥺</button>
@@ -100,7 +131,7 @@
             </div>
             <div class="memory-card" style="--r: 2deg;">
                 <img src="n.jpg" alt="Memory 2">
-                <p>Always do smile like this 🌸</p>
+                <p>Always smile like this 🌸</p>
             </div>
             <div class="memory-card" style="--r: -2deg;">
                 <img src="Screenshot_20260408_171042_Instagram.jpg" alt="Memory 3">
@@ -110,9 +141,11 @@
                 <img src="20260302_114559(1).jpg" alt="Memory 4">
                 <p>Sorry for this one 😂🥂</p>
             </div>
-            <div class="memory-card" style="--r: 4deg;">
-                <img src="Snapchat-990637410.mp4" alt="Memory 5">
-                <p>dont have more pics but have more memories 💖</p>
+            <div class="memory-card" style="--r: 0deg;">
+                <video autoplay loop muted playsinline>
+                    <source src="Snapchat-990637410.mp4" type="video/mp4">
+                </video>
+                <p>Don't have more pics, but have a lifetime of memories 💖</p>
             </div>
         </div>
 
@@ -158,11 +191,9 @@
     }
 
     function celebrate() {
-        // Switch Audio
         document.getElementById("bgMusic").pause();
         document.getElementById("yesMusic").play().catch(() => {});
 
-        // UI Transition
         document.getElementById("mainContent").style.display = "none";
         document.getElementById("pfp").style.display = "none";
         document.getElementById("typing").style.display = "none";
