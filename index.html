@@ -36,14 +36,18 @@ body {
     font-size: 32px;
 }
 
-/* Hidden Message */
+/* Message lines */
 #loveMessage {
     display: none;
+    margin-top: 15px;
+}
+
+.line {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 0.6s;
     font-size: 16px;
     line-height: 1.7;
-    margin-top: 15px;
-    opacity: 0;
-    transition: opacity 0.6s ease;
 }
 
 /* Subtitle */
@@ -62,28 +66,24 @@ button {
     transition: 0.3s;
 }
 
-/* Yes Button */
 #yesBtn {
     background: #ff4d6d;
     color: white;
     box-shadow: 0 4px 15px rgba(255,77,109,0.4);
 }
 
-/* No Button */
 #noBtn {
     background: white;
     color: #ff4d6d;
     position: fixed;
 }
 
-/* Click Button */
 #openBtn {
     background: white;
     color: #ff4d6d;
     font-weight: 500;
 }
 
-/* Hover */
 button:hover {
     transform: scale(1.08);
 }
@@ -110,7 +110,7 @@ button:hover {
 /* Mobile */
 @media (max-width: 480px) {
     #typing { font-size: 26px; }
-    #loveMessage { font-size: 14px; }
+    .line { font-size: 14px; }
 }
 </style>
 </head>
@@ -120,15 +120,13 @@ button:hover {
 <div class="container">
     <h1 id="typing"></h1>
 
-    <!-- Click Button -->
     <button id="openBtn" onclick="showMessage()">💌 Click Here</button>
 
-    <!-- Hidden Message -->
-    <p id="loveMessage">
-        Our friendship is endless ❤️  
-        Every moment with you feels magical ✨  
-        You came into my life quietly, but changed everything 💖  
-    </p>
+    <div id="loveMessage">
+        <p class="line">Our friendship is endless ❤️</p>
+        <p class="line">Every moment with you feels magical ✨</p>
+        <p class="line">You came into my life quietly, but changed everything 💖</p>
+    </div>
 
     <h2>Will You Be My Friend Forever? 💖</h2>
 
@@ -145,8 +143,6 @@ button:hover {
 // Typing Effect
 let text = "For Neha ❤️";
 let i = 0;
-document.getElementById("typing").innerHTML = "";
-
 function typingEffect() {
     if (i < text.length) {
         document.getElementById("typing").innerHTML += text.charAt(i);
@@ -156,14 +152,19 @@ function typingEffect() {
 }
 typingEffect();
 
-// Show Message
+// Show Message One by One
 function showMessage() {
-    let msg = document.getElementById("loveMessage");
-    msg.style.display = "block";
+    let container = document.getElementById("loveMessage");
+    container.style.display = "block";
 
-    setTimeout(() => {
-        msg.style.opacity = "1";
-    }, 100);
+    let lines = document.querySelectorAll(".line");
+
+    lines.forEach((line, index) => {
+        setTimeout(() => {
+            line.style.opacity = "1";
+            line.style.transform = "translateY(0)";
+        }, index * 1200);
+    });
 }
 
 // YES Click
